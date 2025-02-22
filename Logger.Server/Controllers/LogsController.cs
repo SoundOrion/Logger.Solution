@@ -17,9 +17,9 @@ public class LogsController : ControllerBase
     {
         // 受信データを文字列に変換（デバッグ用）
         var receivedLogs = JsonSerializer.Serialize(logs, new JsonSerializerOptions { WriteIndented = true });
-        Console.WriteLine($"Received logs: {receivedLogs}");
 
         // 必要に応じてデータベースやファイルに保存する処理を追加
+        _logger.LogInformation("Received logs: {receivedLogs}", receivedLogs); // Loki に転送など
 
         return Ok(new { message = "Logs received successfully" });
     }
